@@ -5,7 +5,11 @@
 </head>
 <body>
     <h1>Simple Todo App</h1>
-    <p>Welcome, {{ current_user }}!</p>
+    <p>Welcome, {{ current_user }}! 
+        <form action="/logout" method="post" style="display: inline;">
+            <button type="submit">Logout</button>
+        </form>
+    </p>
 
     <form action="/todos" method="get">
         <button type="submit">Show All Todos</button>

@@ -8,7 +8,7 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
 # Simple user storage
-users = {"admin": "password", "monganio": "1234"}
+users = {"admin": "password", "monganio": "123", "absalomlor": "1234"}
 
 def get_current_user(session: Optional[str] = Cookie(None)):
     if not session or session not in users:
@@ -32,6 +32,12 @@ def login(username: str = Form(...), password: str = Form(...)):
         response.set_cookie("session", username)
         return response
     raise HTTPException(status_code=401, detail="Invalid credentials")
+
+@app.post("/logout")
+def logout():
+    response = RedirectResponse("/login", status_code=303)
+    response.delete_cookie("session")
+    return response
 
 @app.get("/", response_class=HTMLResponse)
 def read_root(request: Request, session: Optional[str] = Cookie(None)):
