@@ -5,13 +5,13 @@
 </head>
 <body>
     <h1>Simple Todo App</h1>
+    <p>Welcome, {{ current_user }}!</p>
 
     <form action="/todos" method="get">
         <button type="submit">Show All Todos</button>
     </form>
 
     <form action="/create-todo" method="post">
-        <input type="text" name="x_user" placeholder="Enter ur name" required>
         <input type="text" name="item" placeholder="Enter a new todo" required>
         <button type="submit">Add</button>
     </form>
@@ -24,7 +24,6 @@
                 <button onclick="showDeleteForm('{{ loop.index0 }}')">Delete</button>
                 <form id="deleteForm{{ loop.index0 }}" action="/delete-todo" method="post" style="display: none; margin-left: 10px;">
                     <input type="hidden" name="item" value="{{ todo.item }}">
-                    <input type="text" name="x_user" placeholder="Enter your name" required>
                     <button type="submit">Confirm Delete</button>
                     <button type="button" onclick="hideDeleteForm('{{ loop.index0 }}')">Cancel</button>
                 </form>
